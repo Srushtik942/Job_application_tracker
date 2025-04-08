@@ -13,6 +13,10 @@ const JobApplication = sequelize.define("JobApplication",{
     jdUrl:{
         type : DataTypes.STRING
     },
+    appliedAt:{
+        type: DataTypes.DATE,
+        allowNull: false
+    },
     status:{
         type: DataTypes.ENUM('no reply', 'rejected', 'interview', 'selected', 'accepted'),
         defaultValue: 'no reply',

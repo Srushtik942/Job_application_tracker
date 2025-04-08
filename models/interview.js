@@ -6,7 +6,8 @@ const { FOREIGNKEYS } = require("sequelize/lib/query-types")
 const interview = sequelize.define("interview",{
     id :{
         type: DataTypes.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true,
     },
     applicationId : {
         type: DataTypes.INTEGER,

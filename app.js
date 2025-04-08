@@ -1,5 +1,5 @@
 const express = require('express')
-const JobApplication = require('./routes/applications')
+const applicationsRoutes = require('./routes/applications')
 
 const app = express();
 app.use(express.json());
