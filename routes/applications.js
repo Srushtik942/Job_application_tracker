@@ -214,19 +214,31 @@ router.get('/:id/interview',async(req,res)=>{
 })
 
 
+// - GET /reports/applications
 
+// - Return the total number of applications by status (e.g., how many interviews, selected, or rejected).
 
+router.get("/interviews/report/",async(req,res)=>{
+    try {
+        let status = req.query.status;
 
+        if(!status){
+            return res.status(400).json("Status is required!");
+        }
+        let result = await JobApplication.findAll({
+           where:{status}
+        })
+        console.log(result);
 
+        if(!result){
+            res.status(404).json("No result found!");
+        }
 
+        res.status(200).json({message:"Successfully fetched the interviews application by status",result});
 
-
-
-
-
-
-
-
-
+    } catch (error) {
+        res.status(500).json({message:"Internal Server Error!",error:error.message});
+    }
+})
 
 module.exports = router;
