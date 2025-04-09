@@ -57,47 +57,52 @@ const seedDB = async()=>{
 
     await interview.sync({force:true});
     await interview.bulkCreate([
+      {
+          applicationId: 2,
+          roundNum: 1,
+          roundType: 'telephonic',
+          interviewDate: '2024-02-10',
+          questions: 'What is your experience with React?',
+          roleOffered: null,
+          compensationOffered: null
+        },
         {
-            roundNum: 1,
-            roundType: 'telephonic',
-            interviewDate: '2024-02-10',
-            questions: 'What is your experience with React?',
-            roleOffered: null,
-            compensationOffered: null
-          },
-          {
-            roundNum: 2,
-            roundType: 'technical',
-            interviewDate: '2024-02-15',
-            questions: 'Explain the event loop in JavaScript.',
-            roleOffered: null,
-            compensationOffered: null
-          },
-          {
-            roundNum: 3,
-            roundType: 'HR',
-            interviewDate: '2024-02-20',
-            questions: 'Why do you want to join our company?',
-            roleOffered: 'Frontend Developer',
-            compensationOffered: '10 LPA'
-          },
-          {
-            roundNum: 1,
-            roundType: 'online assessment',
-            interviewDate: '2024-03-01',
-            questions: 'Coding round with data structures and algorithms problems.',
-            roleOffered: null,
-            compensationOffered: null
-          },
-          {
-            roundNum: 2,
-            roundType: 'managerial',
-            interviewDate: '2024-03-07',
-            questions: 'Describe a challenge you faced in your last project and how you overcame it.',
-            roleOffered: 'Software Engineer',
-            compensationOffered: '12.5 LPA'
-          }
-    ])
+          applicationId: 1,
+          roundNum: 2,
+          roundType: 'technical',
+          interviewDate: '2024-02-15',
+          questions: 'Explain the event loop in JavaScript.',
+          roleOffered: null,
+          compensationOffered: null
+        },
+        {
+          applicationId: 3,
+          roundNum: 3,
+          roundType: 'HR',
+          interviewDate: '2024-02-20',
+          questions: 'Why do you want to join our company?',
+          roleOffered: 'Frontend Developer',
+          compensationOffered: '10 LPA'
+        },
+        {
+          applicationId: 3,
+          roundNum: 1,
+          roundType: 'online assessment',
+          interviewDate: '2024-03-01',
+          questions: 'Coding round with data structures and algorithms problems.',
+          roleOffered: null,
+          compensationOffered: null
+        },
+        {
+          applicationId: 4,
+          roundNum: 2,
+          roundType: 'managerial',
+          interviewDate: '2024-03-07',
+          questions: 'Describe a challenge you faced in your last project and how you overcame it.',
+          roleOffered: 'Software Engineer',
+          compensationOffered: '12.5 LPA'
+        }
+  ])
 
     console.log("Database Seeded!");
     process.exit(0);

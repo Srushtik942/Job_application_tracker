@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node server.js",
     "seed": "node db/seed.js",
-    "seed:test": "cross-env NODE_ENV=test node db/seed_test.js"
+    "seed:test": "cross-env NODE_ENV=test node db/seed_test.js",
+    "test": "cross-env NODE_ENV=test jest --runInBand"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
@@ -18,5 +19,8 @@
     "sequelize": "^6.37.7",
     "sqlite3": "^5.1.7",
     "supertest": "^7.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }
