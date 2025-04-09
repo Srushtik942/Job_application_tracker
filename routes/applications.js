@@ -34,7 +34,7 @@ router.get("/",async(req,res)=>{
             res.status(404).json("Not able to load applications!")
         }
 
-        res.status(200).json({message:"Applications fetched successfully!",result});
+        res.status(200).json({message:"Applications fetched successfully!"});
 
     }catch(error){
         res.status(500).json({message:"Internal Server Error",error:error.message});
@@ -59,7 +59,7 @@ router.get("/filter/", async (req, res) => {
         return res.status(404).json({ message: "No job applications found for this company!" });
       }
 
-      res.status(200).json({ message: "Applications fetched successfully!", result: results });
+      res.status(200).json({ message: "Applications fetched successfully!" });
     } catch (error) {
       res.status(500).json({ message: "Internal server error!", error: error.message });
     }
@@ -75,7 +75,7 @@ router.get("/filter/app/",async(req,res)=>{
     let result = await JobApplication.findAll({
         where: {status : status}
     });
-    res.status(200).json({message:"Application fetched successfully by status",result: result});
+    res.status(200).json({message:"Application fetched successfully by status"});
 }catch(error){
     res.status(500).json({message:"Internal Server Error!", error:error.message});
 }
@@ -96,7 +96,7 @@ router.get("/filter/date/",async(req,res)=>{
             }
           });
         console.log(result);
-        res.status(200).json({message:"Application successfully retrived!",result});
+        res.status(200).json({message:"Application successfully retrived!"});
 
     } catch (error) {
         res.status(500).json({message:"Internal Server Error",error:error.message});
@@ -107,13 +107,13 @@ router.get("/filter/date/",async(req,res)=>{
 router.get("/:id",async(req,res)=>{
     try {
         let id = parseInt(req.params.id);
-        let result = await JobApplication.findByPk({
+        let result = await JobApplication.findOne({
             where:{id}
         });
         if (!result){
             res.status(404).json("No application found for id!");
         }
-        res.status(200).json({message:"Successfully fetched application",result});
+        res.status(200).json({message:"Successfully fetched application"});
     } catch (error) {
         res.status(500).json({message:"Internal Server Error!",error:error.message});
     }
@@ -130,12 +130,16 @@ router.put('/:id',async(req,res)=>{
 
         let result = await JobApplication.findByPk(id);
 
+        if(!result){
+            res.status(404).json("Application not found!");
+        }
+
         if (status) result.status = status;
         if (interviewRounds) result.interviewRounds = interviewRounds;
 
          await result.save();
 
-        res.status(200).json({message:"Successfully fetched application!",result});
+        res.status(200).json({message:"Successfully fetched application!"});
     } catch (error) {
         res.status(500).json({message:"Internal Server Error",error:error.message});
     }
@@ -148,7 +152,7 @@ router.delete('/:id',async(req,res)=>{
         let id = parseInt(req.params.id);
         let result = await JobApplication.findByPk(id);
         if(!result){
-            res.status(400).json({message:'Application not found'})
+            res.status(404).json({message:'Application not found'})
         }
 
         result.destroy();
@@ -188,7 +192,7 @@ router.post('/:id/interview',async(req,res)=>{
          }
 
         );
-        res.status(200).json({message:"Interview created successfully!",result});
+        res.status(200).json({message:"Interview created successfully!"});
     } catch (error) {
         res.status(500).json({message:"Internal Server Error",error:error.message});
     }
@@ -205,8 +209,11 @@ router.get('/:id/interview',async(req,res)=>{
             res.status(400).json("check your request body");
         }
         let result = await interview.findByPk(id);
+        if(!result){
+            res.status(404).json('Application not found.');
+        }
 
-        res.status(200).json({message:"Successfully fetched application by id",result})
+        res.status(200).json({message:"Successfully fetched application by id"})
 
     } catch (error) {
         res.status(500).json({message:"Internal Server Error!",error:error.message});
@@ -234,7 +241,7 @@ router.get("/interviews/report/",async(req,res)=>{
             res.status(404).json("No result found!");
         }
 
-        res.status(200).json({message:"Successfully fetched the interviews application by status",result});
+        res.status(200).json({message:"Successfully fetched the interviews application by status"});
 
     } catch (error) {
         res.status(500).json({message:"Internal Server Error!",error:error.message});
